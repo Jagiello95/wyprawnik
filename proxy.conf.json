@@ -1,0 +1,8 @@
+{
+  "/maps": {
+    "target": "http://mapserver.com",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {"^/maps": ""}
+  }
+}
