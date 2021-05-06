@@ -1,0 +1,49 @@
+app-button{
+button {
+  i {
+    margin-right:0.3rem;
+  }
+  color: $primary
+}
+
+
+&.button {
+    &-outline {
+      button {
+      border:1px solid $primary;
+      background-color:transparent;
+      padding:0.3rem 0.5rem;
+      margin:0.2rem;
+      text-transform: uppercase;
+      font-size: 0.6rem;
+      letter-spacing: 1px;
+  
+      &:hover {
+        background:$primary;
+        color:$background;
+        // transform: rotateX(180deg);
+      }
+    &-solid {
+      button {
+      border:1px solid $primary;
+      background-color:$primary;
+      padding:0.3rem 0.5rem;
+      margin:0.2rem;
+      text-transform: uppercase;
+      font-size: 0.6rem;
+      letter-spacing: 1px;
+      color: transparent;
+  
+      &:hover {
+        background:$primary;
+        color:$background;
+        // transform: rotateX(180deg);
+      }
+    }
+    }
+
+    }
+  }
+  
+  }
+}

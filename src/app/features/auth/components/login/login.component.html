@@ -1,2 +1,30 @@
-<p>login works!</p>
-<button (click)="getUsers()">Get users</button>
+<!-- <form [formGroup]="form" class="h-100">
+<div class="app-login-container">
+<div class="col-6 p-5">
+  
+
+
+</div>
+<div class="col-6 login-background">
+
+</div>
+
+</div>
+</form> -->
+<form [formGroup]="form" class="h-100">
+  <app-form-outline label="shared.form.label.login" icon="pi pi-check">
+    <app-form-group label="shared.form.label.email">
+      <input  formControlName="email" appInput type="text" maxlength="256"/>
+    </app-form-group>
+
+    <app-form-group label="shared.form.label.password" >
+      <input  formControlName="password" appInput type="password" maxlength="256"/>
+    </app-form-group>
+    <div class="w-100 text-center">
+    <app-button type="solid" (buttonClicked)="redirect()" >Submit</app-button>
+  </div>
+  </app-form-outline>
+</form>
+
+
+  

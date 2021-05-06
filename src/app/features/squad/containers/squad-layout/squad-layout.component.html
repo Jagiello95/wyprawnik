@@ -1,0 +1,10 @@
+<div class="app-squad-container">
+  <app-sidebar [options]="tabs" (tabChosen)="changeTab($event)"></app-sidebar>
+  <div class="app-squad-main">
+    <div class="app-squad-main-header">{{title.get(chosenTab)}}</div>
+    <div class="app-squad-router-container">
+      <router-outlet></router-outlet>
+    </div>
+    
+  </div>
+</div>

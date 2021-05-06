@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-core-header',
@@ -7,9 +8,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoreHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    document.body.setAttribute('class', `theme-nautic`)
+  }
+
+  public login() {
+    console.log('here')
+    this.router.navigate(['/auth/login']);
+  }
+
+  public register() {
+    this.router.navigate(['/auth/register']);
+  }
+
+  public dashboard() {
+    this.router.navigate(['/dashboard']);
+  }
+
+  public squad() {
+    this.router.navigate(['/squad']);
+  }
+
+  public map() {
+    this.router.navigate(['/map']);
+  }
+
+  public profile() {
+    this.router.navigate(['/profile']);
   }
 
 }

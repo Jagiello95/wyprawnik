@@ -7,6 +7,10 @@ import { AuthRoutingModule } from './auth-routing.module';
 
 
 
+import {InputTextModule} from 'primeng/inputtext';
+import { SharedModule } from '@shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AuthLayoutComponent,
@@ -15,7 +19,11 @@ import { AuthRoutingModule } from './auth-routing.module';
   ],
   imports: [
     AuthRoutingModule,
-    CommonModule
+    CommonModule,
+    InputTextModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
     
   ]
 })

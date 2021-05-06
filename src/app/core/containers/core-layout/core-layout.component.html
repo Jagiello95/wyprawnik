@@ -1,2 +1,8 @@
 <app-core-header></app-core-header>
+<div class="core-layout" >
+  <!-- <button class="test-button" style="z-index:3000" (click)="changeClass()">Click me</button> -->
+  <div [ngClass]="class ? 'zoomIn' : 'zoomOut'" (transitionend)="transitionEnd()">
 <router-outlet></router-outlet>
+
+</div>
+</div>

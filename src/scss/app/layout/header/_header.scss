@@ -1,0 +1,19 @@
+app-core-header {
+  .core-header-container {
+    background-color: $background;
+
+    display:flex;
+    height:5vh;
+
+    button {
+      background:none;
+      color: $primary;
+      text-transform: uppercase;
+      font-size: 0.6rem;
+      border: none;
+      &:hover {
+        opacity:0.5;
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+app-checkbox {
+  @extend .flex-center-xy;
+  display:inline-flex;
+  .app-checkbox-container {
+    display:inline-flex;
+    color: seashell;
+    position:relative;
+    width:8rem;
+    height:2.5rem;
+
+  .app-checkbox {
+    cursor: pointer;
+    height: 0.8rem;
+    width: 0.8rem;
+    left:0;
+    border:2px solid seashell;
+    border-radius: 50%;
+    display: inline-block;
+    @extend .absolute-y;
+    
+
+    .app-checkbox-dot {
+      @extend .flex-center-xy;
+      height: 0.3rem;
+      width: 0.3rem;
+      background-color:white;
+      border-radius: 50%;
+      display: inline-block;
+      @extend .absolute-xy;
+    }
+
+ 
+  }
+     .app-checkbox-label {
+      @extend .absolute-y;
+      left: 1.5rem;
+      padding-bottom: 0.2rem;
+
+    }
+}
+ 
+}

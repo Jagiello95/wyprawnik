@@ -1,0 +1,34 @@
+app-squad-layout{
+  form{
+    height:100%;
+  }
+    .app-squad-container {
+      display: flex;
+      .app-squad-main {
+        width:95vw;
+        height:95vh;
+        // border:1px solid yellow;
+        @extend .flex-column;
+        .app-squad-main-header {
+          background-color:rgba(255, 245, 238, 0.2);
+          height:5vw;
+          width:95vw;
+          padding-left:1rem;
+          @extend .flex-center-y;
+        }
+
+        .app-squad-router-container {
+          height:100%;
+        }
+      }
+  }
+
+  app-squad-template {
+    .app-squad-template-container {
+      height:100%;
+      // background-image: linear-gradient(to right, rgba(173, 216, 230, 0.503) , lightblue);
+      height:100%;
+    }
+
+  }
+}

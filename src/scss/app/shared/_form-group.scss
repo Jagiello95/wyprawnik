@@ -1,0 +1,93 @@
+div[formGroup].is-valid, form[formGroup].is-valid {
+  border-color:$success;
+}
+
+app-form-group {
+  position:relative;
+  font-family: "Poppins", sans-serif;
+  label {
+    color: $primary;
+    position: absolute;
+
+    letter-spacing:1px;
+    padding-left:0.5rem;
+    transition:top 1s linear;
+  }
+
+  &.is-focused, &.is-filled {
+    .input-label {
+      left:0;
+      top: -0.8rem;
+      margin-bottom:0;
+      // text-transform: uppercase;
+      font-size: 0.5rem;
+      @extend .fade-top;
+    }
+  }
+
+  &:not(.is-focused, .is-filled) {
+    .input-label {
+      left:0;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      margin-bottom:0;
+      // text-transform: uppercase;
+      font-size: 0.7rem;
+      @extend .fade-top;
+    }
+  }
+
+  &:not(.is-blurred) {
+    .p-inline-message-error {
+      display:none;
+    }
+  }
+ 
+}
+
+.input-container {
+  border: 1px solid lightgray;
+  border-radius:2px;
+  width:15rem;
+
+}
+
+input {
+  background-color: transparent;
+  color: $primary;
+  padding: 0.5rem 0.5rem;
+  // text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  border-style: solid;
+  transition : border 300ms ease-out;
+  border-radius:3px;
+  width:100%;
+  outline:none;
+  &:focus {
+    
+    text-shadow:none;
+    box-shadow:none;
+    // border-color:transparent;
+
+    // border:0px solid gray;
+  }
+  
+  &:not(.is-pristine):not(:focus):not(.is-valid) {
+    border-color:red;
+    color: red;
+  }
+
+  &.is-valid:not(.is-pristine) {
+    border-color: $success;
+    // outline:1px solid $success;
+  }
+
+  &.is-valid:focus {
+    border-color: $success;
+    // outline:1px solid $success;
+  }
+
+
+}

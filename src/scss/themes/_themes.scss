@@ -1,0 +1,28 @@
+$themes: (
+  main: (
+    'primary': #cda05f,
+    'secondary': #cda05f,
+    'success': #cda05f,
+    'background': #f7f2dc,
+    'background-light':  #ecdeb7,
+    'header': #5f4d36,
+  ),
+  nautic: (
+    'primary': rgb(226, 231, 255),
+    'secondary': white,
+    'success': rgba(255, 217, 0, 0.898),
+    'background':  rgb(53, 45, 74),
+    'background-light':  rgb(65, 53, 95),
+    'header': rgb(68, 68, 68)
+  ),
+  
+);
+
+
+@each $name, $map in $themes {
+  .theme-#{$name} {
+    @each $key, $value in $map {
+      --#{$key}: #{$value};
+    }
+  }
+}

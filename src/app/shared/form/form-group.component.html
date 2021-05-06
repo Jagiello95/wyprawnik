@@ -1,0 +1,30 @@
+<ng-container *transloco='let translation'>
+  <div class='p-input-group' style="position:relative" [ngClass]='{"p-input-group-icon": icon}'>
+    <ng-container *ngTemplateOutlet='inputContent'></ng-container>
+    <ng-container *ngTemplateOutlet='labelContent'></ng-container>
+    <span
+      *ngIf='icon'
+      class='p-form-control-icon p-form-control-icon-append pi {{normalizeIcon}}'
+      (click)='toggle()'></span>
+
+    <ng-container *ngIf='hint !== null'>
+      <span class='form-text text-muted'>{{ translation(hint) }}</span>
+    </ng-container>
+  </div>
+
+  <ng-template #inputContent>
+    <ng-content></ng-content>
+  </ng-template>
+
+  <ng-template #labelContent>
+    <label *ngIf='label; else inputLabel' class='p-label input-label'>
+      {{ translation(label) }}
+    </label>
+  </ng-template>
+
+  <ng-template #inputLabel>
+    <label *ngIf='labelText' class='p-label'>
+      {{ labelText }}
+    </label>
+  </ng-template>
+</ng-container>

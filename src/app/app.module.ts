@@ -3,17 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { MapComponent } from './features/map/map.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HalfLayoutComponent } from './shared/half-layout/half-layout.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TranslocoRootModule } from './transloco/transloco-root.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HalfLayoutComponent
   ],
   imports: [
     BrowserModule,
     CoreModule.forRoot(),
     NgbModule,
+    HttpClientModule,
+    TranslocoRootModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

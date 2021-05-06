@@ -1,0 +1,15 @@
+{
+  "shared": {
+    "form": {
+      "validator": {
+        "email": "Musi być email",
+        "required": "Pole nie może być puste"
+      },
+      "label": {
+        "login": "Login",
+        "email": "Email",
+        "password": "Password"
+      }
+    }
+  }
+}

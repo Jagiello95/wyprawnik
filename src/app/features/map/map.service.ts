@@ -6,8 +6,9 @@ import { environment } from "../../../environments/environment";
 
 export class MapService {
   map!: mapboxgl.Map;
-  style = 'http://localhost:81/styles/klokantech-basic/style.json';
+  // style = 'http://localhost:81/styles/klokantech-basic/style.json';
   // style = 'http://wyprawnik.com/maps/styles/klokantech-basic/style.json';
+  style= 'mapbox://styles/mapbox/streets-v11'
   lat = 	50.654;
   lng = 	7.0982;
   zoom = 6

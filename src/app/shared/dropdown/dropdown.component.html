@@ -1,0 +1,10 @@
+
+ <div class="app-dropdown">
+  <span class="app-dropdown-button">
+  {{title}}  </span>
+  <span class="app-dropdown-pointer"></span>
+  <div class="app-dropdown-options">
+  <span  *ngFor="let option, index as i of options" id={{i}} (click)="chooseOption(i)" [ngClass]="{'selected': option?.selected}" >{{option.label}}</span>
+  </div>
+  <div>{{multiValue}}}}</div>
+  </div>
