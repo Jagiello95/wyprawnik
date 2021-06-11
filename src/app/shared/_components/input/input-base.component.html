@@ -1,0 +1,23 @@
+<div class="component-container" >
+
+  <div class="component-label-container">
+    <input #input [value]="value" (input)=onInput($event) (blur)="onBlur()" (focus)="onFocus()" />
+    <label>{{label}}</label>
+  </div>
+
+
+  <div class="component-scroll-container" *ngIf="icon">
+    <div class="component-icon-container">
+      <div class="component-icon input-icon-fail">
+        <i class="pi pi-times"></i>
+      </div>
+      <div class="component-icon input-icon-success">
+        <i class="pi pi-check"></i>
+      </div>
+      <div class="component-icon">
+        <i [class]="icon"></i>
+      </div>
+    </div>
+  </div>
+
+</div> 

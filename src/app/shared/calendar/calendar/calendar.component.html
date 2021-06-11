@@ -1,0 +1,79 @@
+<div class="calendar-container">
+  <div class="calendar-label">
+    <span>Hello</span>
+    <span *ngIf="!isSingle">Hello again</span>
+  </div>
+<div class="calendar-input d-flex w-100" (click)="onClick()">
+
+  <div class="calendar-input-date">
+
+    <div class="calendar-label-container" [class.bottom] = "placeholderOne">
+
+      <div><span>{{startValue}}</span></div>
+      <div ><span>{{placeholderStartValue}}</span></div>
+    </div>
+  </div>
+
+  <div class="calendar-input-date" *ngIf="!isSingle">
+    <div class="calendar-label-container" [class.bottom] = "placeholderTwo" >
+        <div><span>{{endValue}}</span></div>
+        <div ><span>{{placeholderEndValue}}</span></div>
+    </div>
+  </div>
+
+<div class="calendar-icon-container" [style.top]="iconHandler" *ngIf="icon">
+  <div class="calendar-icon">
+    <i class="pi pi-check"></i>
+    </div>
+    <div class="calendar-icon">
+      <i class="pi pi-times"></i>
+      </div>
+      <div class="calendar-icon">
+        <i [ngClass]="icon"></i>
+        </div>
+      </div>
+</div>
+
+<div class="calendar" style="border: 1px solid yellow" [style.visibility]="active ? 'visible' : 'hidden'">
+  <div class="calendar-header">
+    <div *ngIf="!currMonth" class="previous" (click)=" !currMonth && prevMonth()">{{arrowLeft}}</div>
+    <div class="current">{{currMonthName()}} {{currYear()}}</div>
+    <div class="next" (click)="nextMonth()">{{arrowRight}}</div>
+  </div>
+  <div class="calendar-body">
+    <div class="day-names">
+      <div class="day" *ngFor="let day of dayNames"><div>{{day}}</div></div>
+    </div>
+  <div *ngFor="let week of calendar, let i = index" class="week">
+    <div class="day" *ngFor="let day of week, let j = index" (click)="!beforeToday(day) && onDayClick(day)">
+      <div [ngClass]="styles(day)"><span>{{day.format("D")}}</span></div>
+    </div>
+  </div>
+  <button (click)="change()">Change</button>
+
+</div>
+</div>
+</div>
+
+
+<!-- <div class="component-container" >
+  <div class="component-label-container">
+  <input #input [value]="value" (input)=onInput($event) (blur)="onBlur()" (focus)="onFocus()" />
+  <label>{{label}}</label>
+</div>
+  <div class="component-scroll-container" *ngIf="icon">
+    <div class="component-icon-container">
+
+
+      <div class="component-icon input-icon-fail">
+        <i class="pi pi-times"></i>
+      </div>
+      <div class="component-icon input-icon-success">
+        <i class="pi pi-check"></i>
+      </div>
+      <div class="component-icon">
+        <i [class]="icon"></i>
+      </div>
+    </div>
+  </div>
+</div> -->

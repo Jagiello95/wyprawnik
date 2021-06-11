@@ -1,0 +1,117 @@
+
+
+@mixin input-based {
+  $icon-base: -5rem;
+  $icon-success: -2.5rem;
+  $icon-danger: -0rem;
+
+  .component-container {
+    font-family: "Poppins", sans-serif;
+    position:relative;
+    display:flex;
+    background-color: var(--background-light);
+    border-width:1px;
+    border-color:lightgrey;
+    border-style:solid;
+  }
+    .component-label-container {
+      height:2.5rem;
+      width:100%;
+      border-width: 0px 1px 0px 0px;
+      border-style:solid;
+      border-color:lightgrey;
+      padding: 0 0.5rem;
+      flex:1;
+      @extend .flex-center-y;
+    
+      input {
+        border:0;
+        background-color:transparent;
+        outline:none;
+        height:100%;
+        width:100%;
+        letter-spacing:1px;
+      }
+
+      label {
+        // font-size:0.8rem;
+        pointer-events:none;
+        color: $primary;
+        position: absolute;
+        letter-spacing:1px;
+        transition:top 0.2s linear;
+        font-size:0.8rem;
+        @extend .absolute-y;
+        left:0.5rem;
+      }
+    }
+    
+    .component-scroll-container {
+      position:relative;
+      width:2.5rem;
+      height:2.5rem;
+      overflow:hidden;
+    
+    
+      .component-icon-container {
+        width:2.5rem;
+        height:7.5rem;
+        position:absolute;
+        right:0;
+        top: $icon-base;
+        transition: top 0.4s ease-out;
+        @extend .flex-column;
+        @extend .flex-center-xy;
+    
+        .component-icon {
+          width:2.5rem;
+          height:2.5rem;
+          @extend .flex-center-xy;
+        }
+      }
+  }
+
+
+  &.is-filled {
+    .component-label-container {
+      label {
+        left:0;
+        top: -0.6rem;
+        margin-bottom:0;
+        font-size: 0.5rem;
+        @extend .fade-top;
+      }
+    }
+  }
+
+  &.is-touched.is-blurred:not(.is-valid) {
+    .component-container {
+      border-color:red;
+      color: red;
+    }
+
+    .component-icon-container {
+      top: $icon-danger;
+      position: absolute;
+    }
+  }
+
+  
+  &.is-valid.is-touched {
+    .component-container {
+    border-color: $success;
+    }
+
+    .component-icon-container {
+      top: $icon-success;
+    }
+    // outline:1px solid $success;
+  }
+
+  &.is-valid.is-focused {
+    .component-container {
+      border-color:$success;
+  // outline:1px solid $success;
+    }
+}
+}

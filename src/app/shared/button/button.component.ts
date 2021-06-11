@@ -13,7 +13,7 @@ export class ButtonComponent implements OnInit {
   @Input('type') type: string = "outline";
   @Input('icon') icon!: string;
   @Input('theme') theme: string = "primary";
-  @Output() public buttonClicked = new EventEmitter<any>();
+  @Output() public clicked = new EventEmitter<any>();
   constructor() { }
 
   @HostBinding('class') class = `button-${this.type}`;
@@ -24,7 +24,7 @@ export class ButtonComponent implements OnInit {
   public buttonAction($event: Event) {
     $event.preventDefault()
     $event.stopPropagation()
-    this.buttonClicked.emit()
+    this.clicked.emit()
   }
 
 }

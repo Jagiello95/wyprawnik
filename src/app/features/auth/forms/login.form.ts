@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginModel } from '@api/models/login.model';
 
 @Injectable()
 export class LoginForm {
@@ -14,16 +15,19 @@ export class LoginForm {
   public init(): FormGroup {
     this.form = this.builder.group({
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(8)]]
+      password: [null, [Validators.required, Validators.minLength(6)]]
     });
 
     this.form.valueChanges.subscribe((value: any) => {
-      console.log(value)
       this.model = {
         ...value
       }
     })
 
     return this.form;
+  }
+
+  public prepareModel(): LoginModel {
+    return this.model;
   }
 }

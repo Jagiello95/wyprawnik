@@ -1,10 +1,30 @@
 
- <div class="app-dropdown">
-  <span class="app-dropdown-button">
-  {{title}}  </span>
-  <span class="app-dropdown-pointer"></span>
+ <div class="component-container">
+      <div class="component-label-container">
+        <label>{{label}}</label>
+        <span *ngIf="value">{{value}}</span>
+      </div>
+
+      <div class="component-scroll-container" *ngIf="icon">
+        <div class="component-icon-container">
+
+            <div class="component-icon">
+              <i class="pi pi-times"></i>
+            </div>
+
+            <div class="component-icon">
+              <i class="pi pi-check"></i>
+            </div>
+
+            <div class="component-icon">
+              <i [ngClass]="icon"></i>
+            </div>
+        </div>
+    </div>
+
+  
   <div class="app-dropdown-options">
-  <span  *ngFor="let option, index as i of options" id={{i}} (click)="chooseOption(i)" [ngClass]="{'selected': option?.selected}" >{{option.label}}</span>
+    <span  *ngFor="let option, index as i of options" id={{i}} (click)="chooseOption(i)" [ngClass]="{'selected': option?.selected}" >{{option.label}}</span>
   </div>
-  <div>{{multiValue}}}}</div>
+
   </div>

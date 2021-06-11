@@ -7,6 +7,7 @@ import { SquadRoutingModule } from './squad-routing.module';
 import { SharedModule } from '@shared/shared.module';
 import { SquadComponent } from './components/squad/squad.component';
 import { SquadTemplateComponent } from './components/squad-template/squad-template.component';
+import { NewSquadComponent } from './components/new-squad/new-squad.component';
 
 
 
@@ -14,7 +15,8 @@ import { SquadTemplateComponent } from './components/squad-template/squad-templa
   declarations: [
     SquadLayoutComponent,
     SquadComponent,
-    SquadTemplateComponent
+    SquadTemplateComponent,
+    NewSquadComponent
   ],
   imports: [
     CommonModule,

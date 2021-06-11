@@ -5,8 +5,9 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HalfLayoutComponent } from './shared/half-layout/half-layout.component';
-import { HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco/transloco-root.module';
+import { CommonModule } from '@angular/common';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,14 @@ import { TranslocoRootModule } from './transloco/transloco-root.module';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     CoreModule.forRoot(),
     NgbModule,
-    HttpClientModule,
     TranslocoRootModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

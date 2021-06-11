@@ -69,7 +69,6 @@ export class ControlErrorsDirective implements OnInit, OnDestroy {
       // .pipe(untilDestroyed(this))
       .subscribe(() => {
         const controlErrors: ValidationErrors | null = this.control.errors;
-        console.log(this.control)
         if (controlErrors && (this.control.touched || this.control.value )) {
           this.assignTranslatedError(controlErrors);
         } else if (this.ref) {

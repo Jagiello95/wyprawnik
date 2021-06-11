@@ -12,6 +12,7 @@ export class FormSubmitDirective implements AfterViewInit {
   @Input() public formGroup!: FormGroup;
   public submit$ = fromEvent(this.element, 'submit').pipe(
     tap(() => {
+      console.log('tapped')
       markAsTouched(this.formGroup);
       if (!this.element.classList.contains('ng-submitted')) {
         this.element.classList.add('ng-submitted');
@@ -53,7 +54,6 @@ export class FormSubmitDirective implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log(this.formGroup.valid)
   }
 
   

@@ -1,0 +1,10 @@
+
+<app-card *ngFor="let item of data; index as i">
+<div header><h3>{{item.name}}</h3></div>
+<div body class="profile-squad-container mt-3" >
+  <div class="d-flex"><span>Description: </span><span>{{item.description}}</span></div>
+  <div class="d-flex"><span>Creator: </span><span>{{item.creatorId}}</span></div>
+  <div class="d-flex"><span>Id: </span><span>{{item.id}}</span></div>
+  <div class="d-flex"><span>Members: </span><span *ngFor="let member of item.members">{{member}}</span></div>
+</div>
+</app-card>

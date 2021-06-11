@@ -1,25 +1,23 @@
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { AuthService } from '@features/auth/auth.service';
+import { Observable } from 'rxjs';
 
-// import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-// import { Injectable } from '@angular/core';
-// import { TokenService } from '@core/services/token.service';
-// import { CookieService } from 'ngx-cookie-service';
-// import { Observable } from 'rxjs';
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  constructor(private readonly authState: AuthService) {}
 
-// @Injectable()
-// export class AuthInterceptor implements HttpInterceptor {
+  public intercept(originalRequest: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    let request = originalRequest;
+    const authToken = this.authState.token;
 
-//   constructor(private readonly cookieService: CookieService, private readonly tokenService: TokenService) {}
+      if (authToken !== null) {
+        request = originalRequest.clone({
+          headers: originalRequest.headers.set('Authorization', `Bearer ${authToken}`),
+        });
+      }
 
-//   public intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-//     const authToken = this.tokenService.ssoToken;
 
-//     if (authToken) {
-//     const authReq = req.clone({
-//       headers: req.headers.set('Authorization', `Bearer ${authToken}`)
-//     });
-
-//     return next.handle(authReq);
-//     }
-//     return next.handle(req);
-//   }
-// }
+    return next.handle(request);
+  }
+}

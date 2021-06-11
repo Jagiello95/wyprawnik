@@ -8,6 +8,8 @@ import { FormGroupComponent } from '@shared/form/form-group.component';
 import { FormSubmitDirective } from '@shared/form/form-submit.directive';
 import { InputModule } from '@shared/input';
 import { FormOutlineComponent } from './form-outline/form-outline.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormIconComponent } from './form-icon/form-icon.component';
 
 @NgModule({
   declarations: [
@@ -17,15 +19,17 @@ import { FormOutlineComponent } from './form-outline/form-outline.component';
     ControlErrorsContainerDirective,
     FormSubmitDirective,
     FormOutlineComponent,
+    FormIconComponent
   ],
-  imports: [CommonModule, InputModule, TranslocoModule],
+  imports: [CommonModule, InputModule, TranslocoModule, ReactiveFormsModule],
   exports: [
     FormGroupComponent,
     ControlErrorComponent,
     ControlErrorsDirective,
     ControlErrorsContainerDirective,
     FormSubmitDirective,
-    FormOutlineComponent
+    FormOutlineComponent,
+    FormIconComponent
   ],
 })
 export class FormModule {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthRest } from '@api/rest/auth.rest';
+import { AuthService } from '@features/auth/auth.service';
 
 @Component({
   selector: 'app-core-header',
@@ -8,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class CoreHeaderComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private rest: AuthRest, private auth: AuthService) { }
 
   ngOnInit(): void {
     document.body.setAttribute('class', `theme-nautic`)
@@ -22,6 +24,12 @@ export class CoreHeaderComponent implements OnInit {
   public register() {
     this.router.navigate(['/auth/register']);
   }
+
+  public logout() {
+    this.router.navigate(['/auth/login']);
+    this.auth.logout()
+  }
+
 
   public dashboard() {
     this.router.navigate(['/dashboard']);
@@ -37,6 +45,11 @@ export class CoreHeaderComponent implements OnInit {
 
   public profile() {
     this.router.navigate(['/profile']);
+  }
+
+
+  public users() {
+    this.rest.getUsers().subscribe(console.log)
   }
 
 }

@@ -1,0 +1,281 @@
+app-calendar {
+  @include input-based;
+  &.is-touched.is-blurred.is-invalid {
+    .calendar-container {
+      border-color:red;
+      color: red;
+    }
+
+    .input-icon-container {
+      bottom: 0rem;
+      position: absolute;
+    }
+  }
+  &.is-valid.is-touched.is-blurred{
+    .calendar-container {
+    border-color: $success;
+    }
+
+    .input-icon-container {
+      bottom: -2.5rem
+    }
+    // outline:1px solid $success;
+  }
+
+  &.is-valid.is-focused {
+    .calendar-container {
+      border-color:$success;
+  // outline:1px solid $success;
+    }
+  }
+
+  &.is-filled > .calendar-container > .calendar-label > span {
+    
+    top: -0.6rem;
+    margin-bottom:0;
+    font-size: 0.5rem;
+    letter-spacing:1px;
+    left:0rem !important;
+    @extend .fade-top;
+  }
+
+
+
+
+
+.calendar-container {
+border-width:1px;
+border-color:lightgrey;
+border-style:solid;
+position:relative;
+background-color:var(--background-light);
+
+.calendar-label {
+  width:100%;
+  height:100%;
+  span {
+  position:absolute;
+  z-index:1000;
+  left:50%;
+  @extend .absolute-y;
+  &:first-of-type {
+    left:0.5rem;
+  }
+}
+}
+}
+
+.calendar {
+  box-sizing: border-box;
+  font-size: 1rem;
+  width:100%;
+  position:absolute;
+
+}
+
+.calendar-input {
+  width:100%;
+  height:2.5rem;
+
+  position:relative;
+  overflow:hidden;
+  display:flex;
+
+  .calendar-icon-container {
+    width:2.5rem;
+    height:7.5rem;
+    // background-color:yellow;
+    right:0;
+    top:0;
+    transition: top 0.4s ease-out;
+    position:relative;
+    @extend .flex-column;
+    @extend .flex-center-xy;
+
+    .calendar-icon {
+      width:2.5rem;
+      height:2.5rem;
+      @extend .flex-center-xy;
+    }
+  }
+
+
+ .calendar-input-date {
+   position:relative;
+   flex:1;
+
+
+ }
+
+  .calendar-label-container {
+    height:5rem;
+    width:100%;
+    font-size:0.8rem;
+    background-color:var(--background-light);
+    transition: bottom 0.6s ease-out;
+    display:flex;
+    flex-direction:column;
+    top:-2.5rem;
+    transition: top 0s ease-out;
+    position:absolute;
+    left:0;
+
+    &.bottom {
+      top:-0rem;
+      transition: top 0.4s ease-out;
+    }
+
+
+
+    div {
+      height:100%;
+      width:100%;
+      padding:0.5rem;
+      @extend .flex-center-y;
+
+    }
+    @extend .flex-center-y;
+    &:nth-child(1) {
+      // position:absolute;
+      // left:0;
+      border-right: 1px solid rgba(255, 217, 0, 0.496);
+    }
+    &:nth-child(2) {
+      // position:absolute;
+      // left:50%;
+      border-right: 1px solid rgba(255, 217, 0, 0.496);
+    }
+    i {
+      position:absolute;
+      right:0;
+    }
+  }
+}
+
+.calendar {
+  &-header {
+  text-align: center;
+  min-height: 2rem;
+  line-height: 2rem;
+  color: black;
+  font-family: var(--font-book);
+  font-weight: 700;
+  display: flex;
+  @extend .flex-center-xy;
+   div {
+    display:inline-block;
+  }
+
+    &-previous {
+      flex: 1;
+      text-align: left;
+      margin-left: 1rem;
+    }
+    &-next {
+      flex: 1;
+      text-align: right;
+      margin-right: 1rem;
+    }
+  }
+  &-body {
+    border: 1px solid var(--background-light);
+  }
+}
+
+
+.calendar .day-names {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.calendar .week {
+  display:flex;
+  div {
+  background-color: white;
+  width: calc(100% / 7);
+  height: 54px;
+  line-height: 44px;
+  text-align: center;
+  text-transform: uppercase;
+  color: black;
+  font-weight: 400;
+}
+}
+// .calendar .week div {
+//   width: 100%;
+// }
+
+.calendar .day {
+  position: relative;
+  width: calc(100% / 7);
+  height: 44px;
+  display: inline-block;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  z-index: 1;
+  text-align: center;
+  display:flex;
+
+}
+
+.calendar .day {
+
+  div {
+  width: 54px;
+  height: 44px;
+  position: relative;
+  color: black;
+  z-index: 100;
+  line-height: 44px;
+  cursor:pointer;
+  margin:0.3rem 0;
+  &:hover {
+    color:goldenrod
+  }
+}
+}
+
+.calendar .day div.before {
+  color: var(--background-light);
+}
+
+.calendar .day div.selected {
+  border-width:1px 0px;
+  border-style:solid;
+  border-color: gold;
+  color:gold;
+  font-weight: bold;
+  width:100%;
+  &-start {
+    border-width:1px 0px 1px 1px;
+    border-radius:50% 0% 0% 50%;
+    border-style:solid;
+    border-color: gold;
+    position:relative;
+    span {
+      width:3rem;
+      height:3rem;
+      border-radius:50%;
+      padding:3px;
+      background-color:rgba(255, 255, 0, 0.238);
+      @extend .absolute-xy;
+    }
+  }
+  &-end {
+    border-width:1px 1px 1px 0px;
+    border-radius:00% 50% 50% 00%;
+    border-style:solid;
+    border-color: gold;
+  }
+}
+
+.calendar .day div.today {
+  background-color: var(--background-light);
+}
+
+}

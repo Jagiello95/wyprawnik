@@ -9,6 +9,7 @@ export const environment = {
   },
   defaultLocale: 'en',
   availableLocales: ['en', 'de', 'pl'],
-  apiUrl: 'http://10.1.6.125:84',
+  authUrl: 'http://localhost:3000',
+  squadUrl: 'http://localhost:3001',
   appUrl: 'http://localhost:4200/#/auth/login/'
 };

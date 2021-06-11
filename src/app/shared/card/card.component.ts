@@ -2,8 +2,18 @@ import { Component, ContentChild, EventEmitter, HostBinding, Input, OnInit, Outp
 
 @Component({
   selector: 'app-card',
-  templateUrl: './card.component.html'
+  template: `
+  <div class="app-card-container">
+    <div class="app-card-header">
+      <ng-content select="[header]"></ng-content>
+    </div>
+    <div class="app-card-main">
+      <ng-content select="[body]"></ng-content>
+    </div>
+    <div class="app-card-footer"></div>
+  </div>`
 })
+
 export class CardComponent implements OnInit {
   @Input('type') type: string = "regular";
   @Input('icon') icon!: string;

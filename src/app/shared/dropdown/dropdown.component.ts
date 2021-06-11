@@ -1,5 +1,6 @@
 import { Component, ContentChild, ElementRef, EventEmitter, forwardRef, HostBinding, HostListener, Input, OnInit, Optional, Output, Self } from '@angular/core';
 import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputEventHandler } from '@shared/_components/input/input-base.model';
 
 export interface DropdownOptions {
   value:any;
@@ -10,17 +11,12 @@ export interface DropdownOptions {
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
-  providers: [
-    { 
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: forwardRef(() => DropdownComponent),
-    }
-  ]
+
 })
-export class DropdownComponent implements OnInit, ControlValueAccessor {
+export class DropdownComponent implements OnInit, ControlValueAccessor, InputEventHandler {
   @Input('label') label = 'Dropdown'
   @Input('multi') multi = false;
+  @Input('icon') icon: string | null = null;
   public options: DropdownOptions[] = [
     {value:1, label: 'One'},
     {value:2, label: 'Two'},
@@ -28,13 +24,13 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
     {value:4, label: 'Four'},
     {value:5, label: 'Five'}
   ];
-  private _active: boolean = false;
+  public active: boolean | null = null;
   public value: any;
   public multiValue: any;
 
-  constructor(
-    protected _elementRef: ElementRef<any>,
-  ) {
+
+   constructor(   protected _elementRef: ElementRef<any>, public ngControl: NgControl) {
+    ngControl.valueAccessor = this;
    }
 
   ngOnInit(): void {
@@ -42,19 +38,6 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
 
   public get title() {
     return this.value ? this.value: this.label
-  }
-
-  public get active() {
-    return this._active;
-  }
-
-  public set active(value: boolean) {
-    this._active = value;
-  }
-
-  @HostBinding('class.is-active')
-  public get classActive(): boolean {
-    return this.active;
   }
 
   @HostListener('mouseover', ['$event'])
@@ -98,6 +81,15 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
 
   public resetSelected() {
     this.options.forEach(el => el.selected = false)
+  }
+
+  @HostBinding('class.is-blurred')
+  public get isBlurred(): boolean {
+    return this.active === false;
+  }
+  @HostBinding('class.is-focused')
+  public get isFocused(): boolean {
+    return this.active === true;
   }
 
 }

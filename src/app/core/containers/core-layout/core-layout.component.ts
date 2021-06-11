@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@features/auth/auth.service';
 
 @Component({
   selector: 'core-layout',
@@ -8,13 +9,16 @@ import { Router } from '@angular/router';
 })
 export class CoreLayoutComponent implements OnInit {
   public class: boolean = true;
-  constructor(public router: Router) { }
+  constructor(public router: Router, public authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.state$.subscribe(
+      (res:boolean)=> this.changeClass(res)
+    )
   }
 
-  public changeClass() {
-    this.class = !this.class;
+  public changeClass(bool: boolean) {
+    this.class = bool;
   
   }
 

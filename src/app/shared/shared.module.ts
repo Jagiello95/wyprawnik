@@ -8,6 +8,9 @@ import { SidebarModule } from '@shared/sidebar';
 import { DropdownModule } from '@shared/dropdown';
 import { CheckboxModule } from './checkbox/checkbox.module';
 import { CardModule } from './card';
+import { CalendarModule } from './calendar';
+import { ControlDirective } from './directives/control.directive';
+import { DirectivesModule } from './directives/directives.module';
 
 const SHARED_MODULES = [
   FormModule,
@@ -16,7 +19,9 @@ const SHARED_MODULES = [
   SidebarModule,
   DropdownModule,
   CheckboxModule,
-  CardModule
+  CardModule,
+  CalendarModule,
+  DirectivesModule
 ];
 
 @NgModule({
@@ -25,6 +30,8 @@ const SHARED_MODULES = [
   ],
   exports: [
     CommonModule, HttpClientModule, SHARED_MODULES
+  ],
+  declarations: [
   ]
 })
 export class SharedModule {

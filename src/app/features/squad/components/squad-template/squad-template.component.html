@@ -1,9 +1,26 @@
 <form [formGroup]="formGroup">
-<div class="app-squad-template-container">
-  <div class="col-4">
+<div class="app-squad-template-container d-flex">
+  <div class="col-4 mr-3" style="background-color:white; height:100%;">
 
-    <app-card></app-card>
+    <app-form-outline>
+  
+    <br>
+    <app-input appControl formControlName="name" icon="pi pi-users" label="Some label"></app-input>
+    <br>
+
+    <app-dropdown appControl formControlName="desc" icon="pi pi-caret-down"></app-dropdown>
+    <app-checkbox formControlName="bool" label="lala"></app-checkbox>
+    <app-checkbox formControlName="bool" label="nana"></app-checkbox>
+    <app-checkbox formControlName="bool" label="rara"></app-checkbox>
+    <app-checkbox formControlName="bool" label="sasa"></app-checkbox>
+    <br>
+    <br>
+    <app-calendar appControl formControlName="date" onChange="log" type="single" icon="pi pi-calendar" label="Hello" ></app-calendar>
+  </app-form-outline>
+
+  bool:{{formGroup.controls.bool.value}}
   </div>
+  <div class="col-8"style="background-color:white; height:100%;"> </div>
 
 
 </div>

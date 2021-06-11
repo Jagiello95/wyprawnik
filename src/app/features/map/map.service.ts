@@ -52,22 +52,22 @@ export class MapService {
       this.map.on('load', ()=>  {
         console.log('on map load')
 
-      this.map.addSource('bonn', {
-        'type': 'vector',
-        "tiles": ["http://localhost:8080/maps/bonn/{z}/{x}/{y}.vector.pbf?"],
-        // "tolerance": 0
-      });
+      // this.map.addSource('bonn', {
+      //   'type': 'vector',
+      //   "tiles": ["http://localhost:8080/maps/bonn/{z}/{x}/{y}.vector.pbf?"],
+      //   // "tolerance": 0
+      // });
 
-      this.map.addLayer({
-        "id": "road",
-        "source": "bonn",
-        "source-layer": "road",
-        "type": "line",
-        "paint": {
-          "line-color": "#FF0000",
-          "line-width": 1
-        }
-      });
+      // this.map.addLayer({
+      //   "id": "road",
+      //   "source": "bonn",
+      //   "source-layer": "road",
+      //   "type": "line",
+      //   "paint": {
+      //     "line-color": "#FF0000",
+      //     "line-width": 1
+      //   }
+      // });
 
     }
     )

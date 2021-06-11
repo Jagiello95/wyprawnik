@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { InputDirective } from '@shared/input/input.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComponentsModule } from '@shared/_components/components.module';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
-  declarations: [InputDirective],
-  imports: [CommonModule],
-  exports: [InputDirective],
+  declarations: [InputComponent],
+  imports: [CommonModule, ComponentsModule],
+  exports: [InputComponent],
 })
 export class InputModule {}

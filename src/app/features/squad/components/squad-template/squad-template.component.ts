@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-squad-template',
@@ -8,12 +8,20 @@ import { FormBuilder } from '@angular/forms';
 })
 export class SquadTemplateComponent implements OnInit {
   public formGroup = this.builder.group({
-    email: [null, []],
-    password: [null, []]
+    name: [null, [Validators.minLength(3), Validators.required]],
+    desc: [null, [Validators.required]],
+    date: [null, [Validators.required]],
+    bool:[null, [Validators.required]]
   });
   constructor(public builder: FormBuilder) { }
 
   ngOnInit(): void {
   }
+
+  public log(event: any) {
+    console.log(event)
+  }
+
+
 
 }

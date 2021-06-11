@@ -17,12 +17,11 @@ import {
 import { AbstractControl } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { InputDirective } from '@shared/input/input.directive';
-import { InputMask } from 'primeng/inputmask';
-import { InputNumber } from 'primeng/inputnumber'
+import { InputComponent } from '@shared/input/input/input.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-type controlType = InputDirective | InputMask | InputNumber
+type controlType = InputDirective
 
 @Component({
   selector: 'app-form-group',
@@ -42,8 +41,7 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterViewIn
 
   @ContentChild(InputDirective) public _controlNonStatic!: InputDirective;
   @ContentChild(InputDirective, { static: true }) public _controlStatic!: InputDirective;
-  @ContentChild(InputMask) public _controlPrimeInputMask!: InputMask;
-  @ContentChild(InputNumber) public _controlPrimeInputNumber!: InputNumber;
+  @ContentChild(InputComponent) public _input!: InputComponent;
 
   private readonly _destroyed = new Subject<void>();
 
@@ -53,7 +51,6 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterViewIn
   private _blurred: boolean = false;
 
   private _readonly!: boolean;
-  private unmasked = true;
 
   constructor(
     private readonly _changeDetectorRef: ChangeDetectorRef,
@@ -65,13 +62,6 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterViewIn
     return obj instanceof InputDirective;
   }
 
-  private static isInputMaskControl(obj: controlType): obj is InputMask {
-    return obj instanceof InputMask;
-  }
-
-  private static isInputNumberControl(obj: controlType): obj is InputNumber {
-    return obj instanceof InputNumber;
-  }
 
   public set blurred(blurred: boolean) {
     this._blurred = blurred;
@@ -124,8 +114,7 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterViewIn
     return (
         this._controlNonStatic ||
         this._controlStatic ||
-        this._controlPrimeInputMask ||
-        this._controlPrimeInputNumber
+        this._input
     );
   }
 
@@ -140,23 +129,17 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterViewIn
 
 
   @HostBinding('class.is-focused')
-  public get focused(): boolean {
+  public get classFocused(): boolean {
     if (this._control && FormGroupComponent.isInputControl(this._control)) {
       return this._control.focused;
-    } else if (FormGroupComponent.isInputMaskControl(this._control) || FormGroupComponent.isInputNumberControl(this._control)) {
-      return this._control.focused;
     }
-    return true;
+    return false;
   }
 
   @HostBinding('class.is-filled')
-  public get filled(): boolean {
+  public get classFilled(): boolean {
       if (this._control && FormGroupComponent.isInputControl(this._control)) {
         return !this._control.empty;
-      }
-
-      else if (FormGroupComponent.isInputMaskControl(this._control) || FormGroupComponent.isInputNumberControl(this._control) ) {
-        return this._control.filled;
       }
     return true;
   }
@@ -166,10 +149,10 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterViewIn
     return this.required;
   }
 
-  @HostBinding('class.is-blurred')
-  public get classBlurred(): boolean {
-    return this.blurred;
-  }
+  // @HostBinding('class.is-blurred')
+  // public get classBlurred(): boolean {
+  //   return this.blurred;
+  // }
 
   @HostBinding('class.is-readonly')
   public get isReadonly(): boolean {
@@ -177,7 +160,7 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterViewIn
   }
 
   @HostBinding('class.is-blurred')
-  public get isBlurred(): boolean {
+  public get classBlurred(): boolean {
     if (this._control && FormGroupComponent.isInputControl(this._control)) {
       return this._control.blurred;
     }
@@ -194,6 +177,12 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterViewIn
 
   @HostBinding('attr.is-valid')
   public get isValid(): boolean {
+    return this.valid ? this.valid : false;
+  }
+
+  
+  @HostBinding('class.is-valid')
+  public get classValid(): boolean {
     return this.valid ? this.valid : false;
   }
 
@@ -239,11 +228,21 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterViewIn
     this._destroyed.complete();
   }
 
-  public toggle(): void {
-    if (this.toggleIcon) {
-      this.icon = this.icon === 'eye' ? 'eye-slash' : 'eye';
-      this.unmasked = !this.unmasked;
-      this.toggleEvent.emit(this.unmasked ? 'password' : 'text');
+  public iconActive: boolean = false;
+
+  public get iconPosition() {
+    if(!this.classValid && this.classBlurred) {
+      return '0rem'
     }
+    else if(this.classValid) {
+    return '-2.5rem'
+  } else {
+    return '-5rem'
   }
+  }
+
+  public iconChange() {
+    this.iconActive = !this.iconActive;
+  }
+
 }

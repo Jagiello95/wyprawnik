@@ -7,6 +7,9 @@ import { CoreComponent } from './core.component';
 import { GlobalErrorHandler } from './services/global-error.handler';
 import { CoreLayoutComponent } from './containers/core-layout/core-layout.component';
 import { CoreHeaderComponent } from './components/core-header/core-header.component';
+import { ApiModule } from '@api/api.module';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [CoreComponent, CoreLayoutComponent, CoreHeaderComponent],
@@ -14,6 +17,8 @@ import { CoreHeaderComponent } from './components/core-header/core-header.compon
     CommonModule,
     HttpClientModule,
     CoreRoutingModule,
+    ApiModule.forRoot(),
+    
   ],
   exports: [RouterModule, CoreComponent],
   providers: [
@@ -21,6 +26,7 @@ import { CoreHeaderComponent } from './components/core-header/core-header.compon
       provide: ErrorHandler,
       useClass: GlobalErrorHandler,
     },
+    AuthGuard
   ],
 })
 export class CoreModule {

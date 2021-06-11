@@ -1,0 +1,6 @@
+<div class="profile-main">
+  <app-profile-menu (changeTab)="changedTab($event)"></app-profile-menu>
+  <div class="profile-wall" [ngSwitch]="selected">
+    <app-profile-squads *ngSwitchCase="tabs.squads" [data]="data"></app-profile-squads>
+  </div>
+</div>

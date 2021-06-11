@@ -1,0 +1,16 @@
+app-profile-menu {
+  position: absolute;
+  top:-5vh;
+  @extend .absolute-x;
+  .profile-menu {
+    height:10vh;
+    width:40vw;
+    background-color:white;
+    display:flex;
+    .profile-menu-item {
+      border:1px solid blue;
+      flex: 1 1 0px;
+
+    }
+  }
+}

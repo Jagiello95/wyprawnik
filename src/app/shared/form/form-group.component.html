@@ -1,17 +1,26 @@
 <ng-container *transloco='let translation'>
-  <div class='p-input-group' style="position:relative" [ngClass]='{"p-input-group-icon": icon}'>
+  <div class='p-input-group d-flex flex-nowrap formgroup-container'  style="position:relative" [ngClass]='{"formgroup-container-icon": icon}'>
     <ng-container *ngTemplateOutlet='inputContent'></ng-container>
     <ng-container *ngTemplateOutlet='labelContent'></ng-container>
-    <span
-      *ngIf='icon'
-      class='p-form-control-icon p-form-control-icon-append pi {{normalizeIcon}}'
-      (click)='toggle()'></span>
+    <div class="input-scroll-container" *ngIf="icon">
+      <div class="input-icon-container" [style.bottom]="iconPosition" (click)="iconChange()">
+        <div class="input-icon">
+          <i [class]="icon"></i>
+        </div>
+        <div class="input-icon input-icon-success">
+          <i class="pi pi-check"></i>
+        </div>
+        <div class="input-icon input-icon-fail">
+          <i class="pi pi-times"></i>
+        </div>
+      </div>
+    </div>
 
     <ng-container *ngIf='hint !== null'>
       <span class='form-text text-muted'>{{ translation(hint) }}</span>
     </ng-container>
   </div>
-
+  
   <ng-template #inputContent>
     <ng-content></ng-content>
   </ng-template>
