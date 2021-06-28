@@ -1,0 +1,16 @@
+<div class="calendar" style="border: 1px solid lightgrey">
+  <div class="calendar-header">
+    <div *ngIf="!currentMonth" class="previous" (click)=" !currentMonth && previousMonth()">{{arrowLeft}}</div>
+    <div class="current">{{currentMonthName}} {{currentYear}}</div>
+    <div class="next" (click)="nextMonth()">{{arrowRight}}</div>
+  
+  </div>
+  <div class="calendar-body">
+    <div class="day-names">
+      <div class="day" *ngFor="let day of dayNames"><div>{{day}}</div></div>
+    </div>
+  <div *ngFor="let week of calendar, let i = index" class="week">
+    <div class="day" *ngFor="let day of week, let j = index" (click)="!beforeToday(day) && onDayClick(day)">
+      <div [ngClass]="styles(day)"><span>{{day.format("D")}}</span></div>
+    </div>
+  </div>

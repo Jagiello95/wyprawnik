@@ -1,76 +1,87 @@
-
+@import './base-vars';
 
 @mixin input-based {
-  $icon-base: -5rem;
-  $icon-success: -2.5rem;
-  $icon-danger: -0rem;
 
+  [appInput] {
+    width:100%;
+  }
   .component-container {
-    font-family: "Poppins", sans-serif;
     position:relative;
     display:flex;
-    background-color: var(--background-light);
-    border-width:1px;
-    border-color:lightgrey;
-    border-style:solid;
+    // font-family: $input-base-font-family;
+    // background-color: $input-base-background-color;
+    border-width:$input-base-border-width;
+    border-color:$input-base-border-color;
+    border-style:$input-base-border-style;
+    > app-input-base {
+      width:100%;
+    }
   }
     .component-label-container {
-      height:2.5rem;
+      position:relative;
       width:100%;
-      border-width: 0px 1px 0px 0px;
-      border-style:solid;
-      border-color:lightgrey;
-      padding: 0 0.5rem;
       flex:1;
+      height:$input-base-height;
+      padding: $input-base-padding;
+
       @extend .flex-center-y;
     
       input {
-        border:0;
-        background-color:transparent;
         outline:none;
         height:100%;
         width:100%;
-        letter-spacing:1px;
+        border:0;
+        background-color:transparent;
+        // letter-spacing:1px;
+        &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+          color: $primary;
+          font-size:$input-base-label-font-size;
+          opacity: 1; /* Firefox */
+          
+        }
+        
       }
 
       label {
-        // font-size:0.8rem;
         pointer-events:none;
-        color: $primary;
         position: absolute;
         letter-spacing:1px;
-        transition:top 0.2s linear;
-        font-size:0.8rem;
+        color: $primary;
+        transition:$input-base-label-transition;
+        font-size:$input-base-label-font-size;
+        left:$input-base-left-space;
         @extend .absolute-y;
-        left:0.5rem;
       }
     }
     
     .component-scroll-container {
       position:relative;
-      width:2.5rem;
-      height:2.5rem;
       overflow:hidden;
+      width:$input-base-height;
+      height:$input-base-height;
     
     
       .component-icon-container {
-        width:2.5rem;
-        height:7.5rem;
         position:absolute;
         right:0;
-        top: $icon-base;
-        transition: top 0.4s ease-out;
+        width:$input-base-height;
+        height:$input-base-height * 3;
+        top: -2 * $input-base-height;
+        transition: top $input-base-icon-transition-speed $input-base-icon-transition-style;
+        border-width:0px 0px 0px 1px;
+        border-style:solid;
+        border-color:$input-base-border-color;
+        font-size: $input-base-label-font-size;
         @extend .flex-column;
         @extend .flex-center-xy;
     
         .component-icon {
-          width:2.5rem;
-          height:2.5rem;
+          width:$input-base-height;
+          height:$input-base-height;
           @extend .flex-center-xy;
         }
       }
   }
-
 
   &.is-filled {
     .component-label-container {
@@ -78,40 +89,40 @@
         left:0;
         top: -0.6rem;
         margin-bottom:0;
-        font-size: 0.5rem;
+        font-size: $input-base-filled-label-size;
         @extend .fade-top;
       }
     }
   }
 
-  &.is-touched.is-blurred:not(.is-valid) {
+  &.is-touched.is-blurred:not(.is-valid).is-animated {
     .component-container {
-      border-color:red;
-      color: red;
+      border-color:$input-base-danger;
+      color: $input-base-danger;
     }
 
     .component-icon-container {
-      top: $icon-danger;
       position: absolute;
+      top: - $input-base-height + $input-base-height;
+      border-color:$input-base-danger;
     }
   }
 
-  
-  &.is-valid.is-touched {
+  &.is-valid.is-touched.is-animated {
     .component-container {
-    border-color: $success;
+    border-color: $input-base-success;
     }
 
     .component-icon-container {
-      top: $icon-success;
+      top: - $input-base-height;
+      border-color:$input-base-success;
     }
-    // outline:1px solid $success;
   }
 
-  &.is-valid.is-focused {
+  &.is-valid.is-focused.is-animated {
     .component-container {
       border-color:$success;
-  // outline:1px solid $success;
     }
 }
+
 }

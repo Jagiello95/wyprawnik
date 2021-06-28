@@ -1,0 +1,177 @@
+<form [formGroup]="form" *ngIf="form">
+
+
+  <table>
+  <ng-content [select]="buttons"></ng-content>
+
+  <!-- Search row -->
+
+  <tr *ngIf="searchable" >
+
+    <th class="cell p-1 " *ngFor="let column of headers, let i=index" [ngSwitch]="searchControls[i]" [formGroup]="getForm(i)" [style.visibility]=" searchable ? 'visible': 'hidden'">
+      <!-- <div class="cell-header">
+        <div
+        appControl
+        appInput
+        (inputEvent)="onInput(column, $event)">
+        </div>
+        <div><i class="pi pi-search"></i></div>
+      </div> -->
+
+    <ng-container *ngSwitchCase="'dropdown'">
+      <div class="cell-header">
+        <app-dropdown appControl label="Search" [checkbox]="true" [multi]="true" [options]="dropdownValues[column.title]" (onSelect)="sort($event, i, column.title, 'dropdown')" ></app-dropdown>
+      </div>
+    </ng-container>
+
+      <ng-container *ngSwitchDefault>
+        <div class="cell-header">
+          <!-- <div
+          appControl
+          appInput
+          (inputEvent)="onInput(column, $event)">
+          </div>
+          <div><i class="pi pi-search"></i></div> -->
+          <app-input  label="Search" (onInput)="sort($event, i, column.title, 'input')" ></app-input>
+        </div>
+      </ng-container>
+    </th>
+
+    <th class="cell" *ngIf="customColumn">
+      <div class="cell-header">
+      </div>
+    </th>
+
+
+    <th class="cell" *ngIf="editable">
+      <div class="cell-header">
+      </div>
+    </th>
+
+    
+  </tr>
+  <!-- End of Search row -->
+
+  <!-- Header row -->
+
+  <tr>
+    <th class="cell" *ngFor="let column of headers">
+      <div class="cell-header">
+        <div>{{column.title}}</div>
+        <ng-container *ngIf="sortable">
+          <div *ngIf="selected.col !== column.title"(click)="onSort(column.title, tableSortDirection.up)"><i class="pi pi-sort"></i></div>
+          <div *ngIf="selected.col === column.title && selected.dir === tableSortDirection.up" (click)="onSort(column.title, tableSortDirection.down)"><i class="pi pi-sort-amount-up"></i></div>
+          <div *ngIf="selected.col === column.title && selected.dir === tableSortDirection.down" (click)="onSort(column.title, tableSortDirection.none)"><i class="pi pi-sort-amount-down"></i></div>
+        </ng-container>
+      </div>
+    </th>
+  
+    <th class="cell" *ngIf="customColumn"><div class="cell-header">{{customColumnTitle}}</div></th>
+    <th class="cell" *ngIf="editable || deletable"><div class="cell-header">{{editColumnTitle}}</div></th>
+  </tr>
+  <!-- End of header row -->
+
+
+  
+
+
+
+  <!-- Body -->
+  <tr *ngFor="let row of rows, let i = index" id ="i" app-table-row [formGroup]="getForm(i)" (acceptEvent)="accept(i)" (denyEvent)="deny(i)">
+
+    <ng-container noneditable>
+      <td class="cell cell-input input-disabled " *ngFor="let column of headers">
+        <ng-container [ngSwitch]="column.type">
+          <app-toggle [formControlName]="column.title" *ngSwitchCase="'boolean'"></app-toggle>
+          <app-color-picker [formControlName]="column.title" *ngSwitchCase="'color-picker'"></app-color-picker>
+          <app-input *ngSwitchDefault [formControlName]="column.title" [disabled]="true" ></app-input>
+      </ng-container>
+      </td>
+
+      <td *ngIf="customColumn" class="cell"    >
+          <div (click)="action('custom', i)">
+            <ng-container [ngTemplateOutlet]="customColumn"></ng-container>
+          </div>
+      </td>
+
+      <td class="cell cell-action" *ngIf="editable || deletable" >
+
+        <div  editRow *ngIf="initRowEdit">
+          <ng-container [ngTemplateOutlet]="initRowEdit"></ng-container>
+        </div>
+
+        <div *ngIf="deleteRow" (click)="delete(i)">
+          <ng-container [ngTemplateOutlet]="deleteRow"></ng-container>
+        </div>
+   
+      <div  *ngIf="editable && !initRowEdit"  >
+        <i class="pi pi-pencil" editRow></i>
+      </div>
+
+      <div *ngIf="deletable && !deleteRow">
+        <i class="pi pi-times" (click)="delete(i)"></i>
+      </div>
+
+      </td>
+   
+    </ng-container> 
+
+
+    <!-- <div acceptEditRow *ngIf="confirmRowEdit">
+      <ng-container [ngTemplateOutlet]="confirmRowEdit"></ng-container>
+      
+    </div> -->
+
+
+    <ng-container editable>
+      <td class="cell cell-input" *ngFor="let column of headers">
+        <ng-container [ngSwitch]="column.type">
+          <app-toggle [formControlName]="column.title" *ngSwitchCase="'boolean'"></app-toggle>
+          <app-color-picker [formControlName]="column.title" *ngSwitchCase="'color-picker'"></app-color-picker>
+          <app-input *ngSwitchDefault [formControlName]="column.title" [disabled]="false" ></app-input>
+      </ng-container>
+      </td>
+
+
+      <td *ngIf="customColumn" class="cell"    >
+          <div (click)="action('custom', i)">
+            <ng-container [ngTemplateOutlet]="customColumn"></ng-container>
+          </div>
+      </td>
+      
+
+      <td class="cell" >
+        <div class="cell-action"  >
+              <div acceptEditRow *ngIf="confirmRowEdit" >
+                <ng-container [ngTemplateOutlet]="confirmRowEdit"></ng-container>
+                
+              </div>
+
+              <div cancelEditRow *ngIf="cancelRowEdit">
+                <ng-container [ngTemplateOutlet]="cancelRowEdit"></ng-container>
+              </div>
+
+          <i #defaultConfirmRow *ngIf="!confirmRowEdit" class="pi pi-check mr-2" acceptEditRow></i>
+          <i #defaultCancelRow *ngIf="!cancelRowEdit" class="pi pi-times" cancelEditRow></i>
+
+        </div>
+      </td>
+
+  </ng-container>
+
+  </tr>   <!-- End of body -->
+
+
+  <!-- End of body -->
+  <tfoot>
+    <tr class="addable-row" >
+      <td [attr.colspan]="numOfCols - 1"></td>
+      <td class="cell-footer" >
+        <i  class="pi pi-plus"></i>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+</form>
+

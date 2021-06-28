@@ -1,0 +1,109 @@
+$table-row-primary-background: white !default;
+$table-row-secondary-background: whitesmoke !default;
+$cell-border-color: transparent;
+
+app-table {
+
+  table {
+    width:100%;
+  }
+
+  tr {
+    background-color:$table-row-primary-background;
+  }
+
+  &.striped {
+    tr {
+      &:nth-of-type(even):not(.addable-row) {
+        background-color:$table-row-secondary-background;
+      }
+    }
+  }
+  .cell {
+
+    padding: 0.5rem 1rem 0.5rem 0.2rem;
+    border:1px solid $cell-border-color;
+  
+    &-input {
+      .component-label-container {
+        border-width:0px;
+        height:2.1rem;
+      }
+    }
+    &-label {
+      border:1px solid $cell-border-color;
+      padding:0.2rem;
+ 
+      div {
+        border: 1px solid transparent;
+
+        height:2.1rem;
+        display:flex;
+        align-items:center;
+        margin:1px;
+        span {
+          border: 1px solid transparent;
+        }
+      }
+    }
+    &-search {
+      padding:0;
+    }
+    &-header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 0.5rem 1rem 0.5rem 0.5rem;
+    }
+
+    &-action {
+      display:flex;
+      justify-content:space-around;
+    }
+
+    &-footer {
+      text-align:center;
+      i {     margin-top:1rem;}
+    }
+  }
+
+  td.input-disabled.cell {
+
+  
+    app-input {
+      .component-container {
+        border-color:transparent;
+      }
+    }
+
+  
+    app-color-picker {
+      .component-container {
+        border-color:lightgray;
+      }
+      .component-label-container {
+        height:100%;
+      }
+    }
+    
+  
+    .cell {
+      .component-label-container {
+        border-width:0px;
+        height:auto;
+      }
+    }
+  }
+
+  th {
+    i {
+      font-size: 0.7rem;
+    }
+  }
+
+  .table-add-row {
+    width:100%;
+    text-align:right
+  }
+
+}

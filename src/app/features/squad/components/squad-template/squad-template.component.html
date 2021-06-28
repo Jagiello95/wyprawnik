@@ -3,26 +3,67 @@
   <div class="col-4 mr-3" style="background-color:white; height:100%;">
 
     <app-form-outline>
-  
+    <app-input  icon="pi pi-users" [animateIcon]="true" label="Some label" formControlName="name" [floatLabel]="true"></app-input>
     <br>
-    <app-input appControl formControlName="name" icon="pi pi-users" label="Some label"></app-input>
+   
+    <app-dropdown appControl icon="pi pi-caret-down" label="Dropdown" [checkbox]="true" [multi]="true" [options]="options" (onSelect)="onChange($event)"></app-dropdown>
+    <br>
+    <app-auto-complete appControl  icon="pi pi-caret-down" minInput="3" label="Auto complete" [checkbox]="true"  [multi]="true" [options]="options" (onInput)="onChange($event)"></app-auto-complete>
+    <br>
+    <app-checkbox label="Checkbox"></app-checkbox>
+    <br>
+    <br>
+    <app-toggle formControlName="bool"></app-toggle>
+
+    <app-button type="solid" >Submit</app-button>
+    <app-button type="outline">Submit</app-button>
+    <app-button type="solid" [round]="true">        <i class="pi pi-calendar"></i></app-button>
+    <app-button type="outline" [round]="true">        <i class="pi pi-calendar"></i></app-button>
+    {{formGroup.controls.desc.value}}
+    <app-color-picker formControlName="desc"></app-color-picker>
+    <br>
+    <br>
+    <app-calendar appControl formControlName="date"  type="single" icon="pi pi-calendar" label="Hello" ></app-calendar>
+    <div app-calendar-base></div>
+    <br>
     <br>
 
-    <app-dropdown appControl formControlName="desc" icon="pi pi-caret-down"></app-dropdown>
-    <app-checkbox formControlName="bool" label="lala"></app-checkbox>
-    <app-checkbox formControlName="bool" label="nana"></app-checkbox>
-    <app-checkbox formControlName="bool" label="rara"></app-checkbox>
-    <app-checkbox formControlName="bool" label="sasa"></app-checkbox>
-    <br>
-    <br>
-    <app-calendar appControl formControlName="date" onChange="log" type="single" icon="pi pi-calendar" label="Hello" ></app-calendar>
+
   </app-form-outline>
 
-  bool:{{formGroup.controls.bool.value}}
+
   </div>
-  <div class="col-8"style="background-color:white; height:100%;"> </div>
+  <div class="col-8"style="background-color:white; height:100%;">
+    <!-- {{formGroup.controls.name.value}}
+    <span *ngFor="let item of formGroup.controls.desc.value">
+      {{item}}
+    </span>
+    {{formGroup.controls.date.value}} -->
+    <app-table 
+    [searchable]="true" 
+    [sortable]="false"
+    [deletable]="true"
+    [addable]="true"
+    [editable]="false"
+    [data]="rows" 
+    [headers]="headers"
+    customColumnTitle="Activate"
+    editColumnTitle="Actions"
+    (onAction)="onChange($event)" 
+    (onRowSave)="onChange($event)"
+    
+    >
+      <!-- <ng-template #customColumn ><app-toggle></app-toggle></ng-template> -->
+      <ng-template #confirmRowEdit > <app-button type="outline" [round]="true" size="s"><i class="pi pi-check"></i></app-button></ng-template>
+      <ng-template #cancelRowEdit > <app-button type="outline" [round]="true" size="s"><i class="pi pi-times"></i></app-button></ng-template>
+      <ng-template #initRowEdit ><app-button type="outline" [round]="true" size="s"><i class="pi pi-pencil"></i></app-button></ng-template>
+      <ng-template #deleteRow ><app-button type="outline" [round]="true" size="s"><i class="pi pi-times"></i></app-button></ng-template>
+ 
+    </app-table>
+  </div>
 
 
 </div>
 
 </form>
+

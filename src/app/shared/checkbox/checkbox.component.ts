@@ -1,33 +1,35 @@
-import { Component, ContentChild, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output } from '@angular/core';
+import { Component, ContentChild, ElementRef, EventEmitter, forwardRef, HostBinding, Input, OnInit, Optional, Output } from '@angular/core';
 import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputEventHandler } from '@shared/_components/input/input-base.model';
 
-@Component({
-  selector: 'app-checkbox',
-  template: `
-  <div class="checkbox-container">
-  <div class="checkbox" [class.selected] = "selected" (click)=select()>
-  <div class="scroll-container">
-    <div class="icon-container">
-      <div class="component-icon"><i class="pi pi-check"></i>   </div>
-      <div class="component-icon"> </div>
- 
-  </div>
-</div>
+enum SelectableComponents {
+  checkbox = "app-checkbox",
+  toggle = "app-toggle"
+}
 
-</div>
-  <div *ngIf="label" class="checkbox-label">{{label}}</div>
-  </div>
+@Component({
+  selector: 'app-checkbox, app-toggle',
+  template: `
+  <div appCheckbox [disabled]="disabled" [selected]="selected" [successIcon]="successIcon" [failIcon]="failIcon" [label]="label" (selectedEvent)="select($event)"></div>
   `
 })
 export class CheckboxComponent implements OnInit, ControlValueAccessor, InputEventHandler {
   @Input() public label: string | null = null;
+  @Input() public disabled: boolean | null = false;
   public selected: boolean | null = null;
-  constructor(public ngControl: NgControl) {
-    ngControl.valueAccessor = this;
+  public selector = this.elem.nativeElement.tagName.toLowerCase();
+  public successIcon = "pi pi-check"
+  public failIcon = this.selector === SelectableComponents.toggle ? "pi pi-times" : null;
+  public touched: boolean = false;
+  constructor(@Optional() public ngControl: NgControl, public elem: ElementRef) {
+    if (ngControl) {ngControl.valueAccessor = this}
    }
 
   ngOnInit(): void {
+    if (this.ngControl.value) {
+      this.select(!!this.ngControl.value);
+    }
+
   }
 
   public checkboxAction($event: Event) {
@@ -35,9 +37,10 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor, InputEve
     $event.stopPropagation();
   }
 
-  public select() {
-    this.selected = !this.selected;
-    console.log(this.selected, this.ngControl)
+  public select(val: boolean) {
+    this.touched = true;
+    this.selected = val;
+    console.log(val)
     this.propagateChange(this.selected);
   }
 
@@ -65,14 +68,17 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor, InputEve
   }
 
   
-  @HostBinding('class.is-blurred')
   public get isBlurred(): boolean {
-    return this.selected === false;
+    return false;
   }
 
-  @HostBinding('class.is-focused')
   public get isFocused(): boolean {
     return false;
+  }
+
+  @HostBinding('class.is-touched')
+  public get isTouched(): boolean {
+    return this.touched;
   }
 
 

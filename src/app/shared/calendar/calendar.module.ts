@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NgDragDropModule } from 'ng-drag-drop';
+import { ComponentsModule } from '@shared/_components/components.module';
 
 
 @NgModule({
@@ -9,6 +10,7 @@ import { NgDragDropModule } from 'ng-drag-drop';
     CalendarComponent
   ],
   imports: [
+    ComponentsModule,
     CommonModule,
     NgDragDropModule.forRoot()
   ],

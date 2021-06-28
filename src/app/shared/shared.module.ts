@@ -9,8 +9,10 @@ import { DropdownModule } from '@shared/dropdown';
 import { CheckboxModule } from './checkbox/checkbox.module';
 import { CardModule } from './card';
 import { CalendarModule } from './calendar';
-import { ControlDirective } from './directives/control.directive';
 import { DirectivesModule } from './directives/directives.module';
+import { TableModule } from './table/table.module';
+import { AutoCompleteModule } from './auto-complete/auto-complete.module';
+import { ColorPickerModule } from './color-picker';
 
 const SHARED_MODULES = [
   FormModule,
@@ -21,7 +23,10 @@ const SHARED_MODULES = [
   CheckboxModule,
   CardModule,
   CalendarModule,
-  DirectivesModule
+  DirectivesModule,
+  AutoCompleteModule,
+  TableModule,
+  ColorPickerModule
 ];
 
 @NgModule({

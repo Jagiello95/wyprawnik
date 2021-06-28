@@ -1,54 +1,77 @@
-app-dropdown {
+@import './base-vars';
+@import './dropdown-vars';
+
+@mixin option-selected {
+  background-color:$dropdown-option-selected-background-color;
+  color: $dropdown-option-selected-color;
+}
+
+@mixin dropdown-options {
 @include input-based;
+[appList] {
+  position:absolute;
+  width:100%;
+}
 
  &.is-focused {
     cursor: pointer;
-    > .app-dropdown > .app-dropdown-pointer, .app-dropdown-options {
+    > .app-dropdown > .app-dropdown-pointer, .dropdown-options {
       visibility:visible;
       pointer-events:all;
       margin-bottom:0;
     }
   }
 
-
-
-.app-dropdown-options {
+.dropdown-options {
   width:100%;
   visibility:hidden;
   pointer-events:none;
   position:absolute;
-  top:2.5rem;
-    @extend .flex-column;
+  z-index:3000;
+  background-color: $dropdown-background-color;
+  outline: $dropdown-outline;
+  top:$dropdown-top-space;
+  // margin-top: $dropdown-border-width * 2;   //adjust for input border
+  @extend .flex-column;
     
 
   span {
     border-style: solid;
-    border-color: gold;
-    border-width: 1px 1px 0px 1px;
-    background-color: transparent;
-    color:black;
-    padding: 0.5rem 1.5rem;
-    font-size:0.8rem;
     letter-spacing:1px;
-    height:2.5rem;
+    border-color: $dropdown-option-border-color;
+    border-width: $dropdown-border-width $dropdown-border-width 0px $dropdown-border-width;
+    background-color: $dropdown-option-background-color;
+    color:$dropdown-option-color;
+    padding: $dropdown-option-padding;
+    font-size:$dropdown-option-font-size;
+    height:$input-base-height;
 
     &:first-of-type {
-      border-width: 0px 1px;
+      border-width: 0px $dropdown-border-width;
     }
 
     &:last-of-type {
-      border-width: 1px;
+      border-width: $dropdown-border-width;
     }
 
     &.selected {
-      background-color: seashell;
-      color:black;
+      @include option-selected;
     }
     &:hover {
-      background-color:seashell;
-      color: black;
+      @include option-selected;
     }
   }
+}
 
 }
+
+app-dropdown, app-auto-complete {
+  @include dropdown-options()
+}
+
+app-table {
+  app-dropdown, app-auto-complete {
+    @include dropdown-options()
+  }
+  
 }

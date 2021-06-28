@@ -1,0 +1,20 @@
+<div [iconbox]="icon">
+
+<div
+appInput
+appControl
+[icon]="icon"
+[label]="label"
+[value]="value2"
+(focusEvent)="onFocus()"
+(blurEvent)="onBlur()"
+(inputEvent)="input($event)">
+</div>
+
+<div
+appList
+[options]="options"
+(selectEvent)="select($event)"
+></div>
+
+<div>

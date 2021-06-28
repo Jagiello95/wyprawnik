@@ -1,0 +1,8 @@
+<ng-container *ngIf="!edited">
+  <ng-content select="[noneditable]"></ng-content>
+</ng-container>
+
+<ng-container *ngIf="edited">
+  <ng-content select="[editable]"></ng-content>
+</ng-container>
+<ng-content select="[content]"></ng-content>

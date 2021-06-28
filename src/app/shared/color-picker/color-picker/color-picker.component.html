@@ -1,0 +1,30 @@
+<form [formGroup]="form">
+<div class="color-picker" >
+  <div class="summary-info" (click)="toggleColors()">
+    <!-- <div class="info">
+      <p class="style">{{ heading }}</p>
+      <p class="style-value">{{ color }}</p>
+    </div> -->
+    <div class="circle circle-display" [ngStyle]="{'background': color}"></div>
+  </div>
+  <div class="opened" *ngIf="show">
+    <div class="colors">
+      <div *ngFor="let paint of colors" class="circle" (click)="changeColor(paint)" [ngStyle]="{'background': paint}"></div>
+    </div>
+
+
+
+        <app-input
+          icon="pi pi-palette"
+          [animateIcon]="true"
+          label="Hex code"
+          [floatLabel]="true"
+          formControlName="select"
+          (onInput)="changeColorManual($event)"
+          (onEnter)="toggleColors()">
+        </app-input>
+        <!-- <input type="text" maxlength="7" [value]="color" (keyup)="changeColorManual(paintInput.value)" #paintInput
+        (keydown.enter)="toggleColors()" /> -->
+  </div>
+</div>
+</form>

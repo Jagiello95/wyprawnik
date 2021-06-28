@@ -1,0 +1,9 @@
+<div class="dropdown-options">
+  <span 
+  *ngFor="let option, index as i of options" 
+  id={{i}} (click)="chooseOption(i)"
+  class="d-flex align-items-center"
+  [ngClass]="{'selected': option?.selected}" >
+  <div appCheckbox  [selected]="!!option?.selected" *ngIf="checkbox"></div>{{option.label}}
+</span>
+</div>

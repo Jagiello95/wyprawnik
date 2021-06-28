@@ -7,23 +7,45 @@ import { Component, ContentChild, EventEmitter, HostBinding, Input, OnInit, Outp
   <i *ngIf="icon" class="pi pi-check"></i>
   <ng-content></ng-content>
   </button>
-  `
+  `,
+  host:     {
+    '[class.button-outline]':'type === "outline"',
+    '[class.button-solid]':'type === "solid"',
+    '[class.button-round]':'round',
+    '[class.button-small]':'size === "s"',
+    '[class.button-medium]':'size === "m"',
+    '[class.button-large]':'size === "l"',
+
+}
 })
 export class ButtonComponent implements OnInit {
-  @Input('type') type: string = "outline";
+  @Input('type') set type(type: string) {
+    this._type = type;
+  }
+
+  get type(): string {
+    return this._type}
+    
+
   @Input('icon') icon!: string;
   @Input('theme') theme: string = "primary";
   @Output() public clicked = new EventEmitter<any>();
+
+  @Input() round!: boolean;
+  @Input() size: string ="m"
+
+  private _type: string = ''
   constructor() { }
 
-  @HostBinding('class') class = `button-${this.type}`;
+  public get isOutline() {
+    return this.type === 'outline'
+  }
 
   ngOnInit(): void {
   }
 
   public buttonAction($event: Event) {
-    $event.preventDefault()
-    $event.stopPropagation()
+
     this.clicked.emit()
   }
 

@@ -1,0 +1,26 @@
+//input-based
+
+//component-container
+$input-base-border-color: lightgrey !default;
+$input-base-border-width: 1px !default;
+$input-base-background-color: white  !default;
+$input-base-border-style: solid !default;
+$input-base-font-family:  "Poppins", sans-serif !default;
+
+//component-label-container
+$input-base-left-space: 0.5rem;
+$input-base-height: 2.5rem !default;
+$input-base-padding: 0 $input-base-left-space !default;
+
+//icon
+$input-base-icon-transition-speed: 0.4s;
+$input-base-icon-transition-style: ease-out;
+
+//label 
+$input-base-label-transition: top 0.2s linear;
+$input-base-label-font-size: 0.8rem;
+
+//filled
+$input-base-filled-label-size: 0.5rem;
+$input-base-danger: red;
+$input-base-success: gold;
